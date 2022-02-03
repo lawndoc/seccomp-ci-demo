@@ -2,7 +2,9 @@
 commander.log
 volumes/
 
+# Ignore other workflows
 tests.yml
+pr-checks.yml
 
 # IDE metadata
 .idea/
