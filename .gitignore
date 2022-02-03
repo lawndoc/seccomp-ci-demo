@@ -2,6 +2,8 @@
 commander.log
 volumes/
 
+tests.yml
+
 # IDE metadata
 .idea/
 .vscode/
