@@ -35,6 +35,7 @@ RUN mkdir -p /opt/demo
 WORKDIR /opt/demo
 COPY . .
 RUN chown -R myuser:myuser /opt/demo
+RUN chmod +x /opt/demo/test.sh
 USER myuser
 
 # expose port
