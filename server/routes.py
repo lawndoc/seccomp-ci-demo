@@ -10,9 +10,9 @@ def command():
     if missingParams := missing(request, data=["command"]):
         return {"error": missingParams}, 400
     command = request.json["command"]
-    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    stdout = process.communicate()[0]
-    return {"stdout": stdout.decode("utf-8")}
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    return {"stdout": stdout.decode("utf-8"), "stderr": stderr.decode("utf-8")}
 
 @app.post("/dummy")
 def dummy():
