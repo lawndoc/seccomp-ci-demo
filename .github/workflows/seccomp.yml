@@ -1,0 +1,32 @@
+name: "Generate Seccomp Filter"
+
+on:
+  push:
+    paths-ignore:
+      - seccomp.json
+
+jobs:
+  generate-seccomp-filter:
+    runs-on: fedora  # self-hosted
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install tools
+        run: sudo dnf install podman oci-seccomp-bpf-hook
+
+      - name: Build Container
+        run: sudo podman build . -n demo
+
+      - name: Record syscalls
+        run: "sudo podman run --annotation io.containers.trace-syscall=of:/tmp/seccomp.json demo /opt/demo/test.sh"
+
+      - name: Commit seccomp filter to repo
+        run: |
+          cp /tmp/seccomp.json .
+          git config --global user.name "github-runner[bot]"
+          git config --global user.email "github-runner[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "generated new seccomp filter"
+          git push origin ${GITHUB_REF##*/}  # pushes to current branch
