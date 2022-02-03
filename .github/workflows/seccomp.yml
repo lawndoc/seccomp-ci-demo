@@ -22,11 +22,12 @@ jobs:
       - name: Record syscalls
         run: "sudo podman run --annotation io.containers.trace-syscall=of:/tmp/seccomp.json demo /opt/demo/test.sh"
 
+      # Commits updated seccomp filter back to the same branch (commit || echo to not fail on no changes)
       - name: Commit seccomp filter to repo
         run: |
           cp /tmp/seccomp.json .
           git config --global user.name "github-runner[bot]"
           git config --global user.email "github-runner[bot]@users.noreply.github.com"
           git add .
-          git commit -m "generated new seccomp filter"
-          git push origin ${GITHUB_REF##*/}  # pushes to current branch
+          git commit -m "generated new seccomp filter" || echo
+          git push origin ${GITHUB_REF##*/} -f
