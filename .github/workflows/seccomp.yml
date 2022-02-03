@@ -17,7 +17,7 @@ jobs:
         run: sudo dnf install podman oci-seccomp-bpf-hook
 
       - name: Build Container
-        run: sudo podman build . -n demo
+        run: sudo podman build --tag demo -f ./Dockerfile
 
       - name: Record syscalls
         run: "sudo podman run --annotation io.containers.trace-syscall=of:/tmp/seccomp.json demo /opt/demo/test.sh"
