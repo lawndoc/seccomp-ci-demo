@@ -22,8 +22,8 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 ### Runner image
 FROM ubuntu:20.04 AS runner-image
 
-# install python
-RUN apt-get update && apt-get install --no-install-recommends -y python3.9 python3-venv && \
+# install python and netcat
+RUN apt-get update && apt-get install --no-install-recommends -y python3.9 python3-venv netcat && \
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # create unprivileged user and virtual environment
