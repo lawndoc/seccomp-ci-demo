@@ -7,4 +7,4 @@ This is a simple flask app that is purposely vulnerable to demonstrate how apply
 This repository demonstrates how to set up a CI workflow that automatically generates a seccomp filter for your container.
 
 ### Details
-*TODO*
+*TODO: add documentation*
