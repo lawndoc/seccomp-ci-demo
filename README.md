@@ -6,7 +6,7 @@ This is a simple flask app that is purposely vulnerable to demonstrate how apply
 
 This repository demonstrates how to set up a CI workflow that automatically generates a seccomp filter for your container.
 
-### Further details
+## Further details
 
 This project was made to bridge the gap between a low-level Linux kernel security feature called [Seccomp-BPF](https://www.kernel.org/doc/html/v4.16/userspace-api/seccomp_filter.html) and modern software development processes. You can use the knowledge gained from this project to help prevent your containerized applications from being successfully exploited.
 
